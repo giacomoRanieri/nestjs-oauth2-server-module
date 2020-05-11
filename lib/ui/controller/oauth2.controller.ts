@@ -1,4 +1,5 @@
 import {
+    Body,
     ClassSerializerInterceptor,
     Controller,
     ForbiddenException,
@@ -28,7 +29,7 @@ export class Oauth2Controller {
     ) {}
 
     @Post('token')
-    async token(@Query() request: OAuth2Request): Promise<OAuth2Response> {
+    async token(@Body() request: OAuth2Request): Promise<OAuth2Response> {
         const client = await this.clientRepository.findByClientId(
             request.clientId,
         );

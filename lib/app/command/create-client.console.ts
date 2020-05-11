@@ -10,7 +10,7 @@ export class CreateClientConsole {
     @Command({
         command:
             'client:create <client_id> <client_secret> <grant_type> <scopes>',
-        autoExit: true,
+        autoExit: false,
     })
     async create(
         @Positional({
@@ -34,11 +34,11 @@ export class CreateClientConsole {
             type: 'string',
             array: true,
             default: [],
-        }) scopes: string[],
+        }) scopes: string,
     ) {
         const command = new CreateClientCommand(
             clientId,
-            scopes.join(' '),
+            scopes,
             clientId,
             grantType,
             !clientSecret,

@@ -7,6 +7,7 @@ import { Expose } from 'class-transformer';
  */
 export class OAuth2Request {
     @ApiProperty({
+        name: 'grant_type',
         type: String,
         description:
             'The type of grant you are requesting, must be "client_credentials"',
@@ -17,6 +18,7 @@ export class OAuth2Request {
     grantType: string;
 
     @ApiProperty({
+        name: 'client_id',
         type: String,
         description: 'The API Key given by the application',
         required: true,
@@ -26,6 +28,7 @@ export class OAuth2Request {
     clientId: string;
 
     @ApiProperty({
+        name: 'client_secret',
         type: String,
         description: 'The API Token given by the application',
         required: true,
@@ -60,6 +63,7 @@ export class OAuth2Request {
     scopes?: string | string[];
 
     @ApiProperty({
+        name: 'refresh_token',
         type: String,
         description:
             'The refresh token only when grant_type is set to "refresh_token"',

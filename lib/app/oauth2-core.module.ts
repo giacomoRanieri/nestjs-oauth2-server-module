@@ -18,7 +18,11 @@ import {
     Oauth2OptionsFactoryInterface,
 } from './interfaces';
 import { OAUTH2_SERVER_OPTIONS } from './oauth2.constants';
-import { CreateAccessTokenHandler, CreateClientHandler } from './command';
+import {
+    CreateAccessTokenHandler,
+    CreateClientConsole,
+    CreateClientHandler
+} from './command';
 import {
     AccessTokenRepository,
     ClientRepository,
@@ -33,7 +37,7 @@ import { Oauth2Controller } from '../ui/controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
 
-export const CommandHandlers = [CreateClientHandler, CreateAccessTokenHandler];
+export const CommandHandlers = [CreateClientHandler, CreateAccessTokenHandler, CreateClientConsole];
 
 export const EventHandlers = [];
 
