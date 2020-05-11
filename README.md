@@ -10,9 +10,9 @@
 
 This module turns your [NestJS Application](https://nestjs.com) into an OAuth2 Server. It is based on
 
-* [TypeORM](https://typeorm.io): For entities and database model
-* [NestJS CQRS Module](https://github.com/nestjs/cqrs): For commands and queries
-* [Passport](http://www.passportjs.org/): For securing routes
+- [TypeORM](https://typeorm.io): For entities and database model
+- [NestJS CQRS Module](https://github.com/nestjs/cqrs): For commands and queries
+- [Passport](http://www.passportjs.org/): For securing routes
 
 ## Installation
 
@@ -27,20 +27,24 @@ npm install --save @switchit/nestjs-oauth2-server # or yarn install @switchit/ne
 The `UserValidatorInterface` lets you validate a user using the `PasswordGrantStrategy`. It is queried in your application
 to validate that the given `username` and `password` matches with a user in your application's DB.
 
-**IMPORTANT**: When the user is not found your have to throw an `InvalidUserException`. 
+**IMPORTANT**: When the user is not found your have to throw an `InvalidUserException`.
 
 ```typescript
-import {Injectable} from "@nestjs/common";
-import {UserValidatorInterface, UserInterface, InvalidUserException} from "@switchit/nestjs-oauth2-server";
+import { Injectable } from '@nestjs/common';
+import {
+  UserValidatorInterface,
+  UserInterface,
+  InvalidUserException,
+} from '@switchit/nestjs-oauth2-server';
 
 @Injectable()
 export class UserValidator implements UserValidatorInterface {
-    async validate(username, password): Promise<UserInterface> {
-        // check if the user exists with the given username and password
-        // ...
-        // or
-        throw InvalidUserException.withUsernameAndPassword(username, password);
-    }
+  async validate(username, password): Promise<UserInterface> {
+    // check if the user exists with the given username and password
+    // ...
+    // or
+    throw InvalidUserException.withUsernameAndPassword(username, password);
+  }
 }
 ```
 
@@ -48,9 +52,9 @@ The validate method should return an instance of the `UserInterface`:
 
 ```typescript
 export interface UserInterface {
-    id: string;
-    username: string;
-    email: string;
+  id: string;
+  username: string;
+  email: string;
 }
 ```
 
@@ -58,23 +62,27 @@ The user interface is then accessible in the payload once connected ot the `Acce
 
 ### Implement the `UserLoaderInterface`
 
-The `UserLoaderInterface` lets you load a user from the database when the `AccessToken` is user specific. 
+The `UserLoaderInterface` lets you load a user from the database when the `AccessToken` is user specific.
 The user is then accessible in the request context of your application.
 
-**IMPORTANT**: When the user is not found your have to throw an `InvalidUserException`. 
+**IMPORTANT**: When the user is not found your have to throw an `InvalidUserException`.
 
 ```typescript
-import {Injectable} from "@nestjs/common";
-import {UserLoaderInterface, UserInterface, InvalidUserException} from "@switchit/nestjs-oauth2-server";
+import { Injectable } from '@nestjs/common';
+import {
+  UserLoaderInterface,
+  UserInterface,
+  InvalidUserException,
+} from '@switchit/nestjs-oauth2-server';
 
 @Injectable()
 export class UserLoader implements UserLoaderInterface {
-    async load(userId: string): Promise<UserInterface> {
-        // Load the user from the database
-        // ...
-        // or throw and 
-        throw InvalidUserException.withId(userId);
-    }
+  async load(userId: string): Promise<UserInterface> {
+    // Load the user from the database
+    // ...
+    // or throw and
+    throw InvalidUserException.withId(userId);
+  }
 }
 ```
 
@@ -88,12 +96,12 @@ import { Module } from '@nestjs/common';
 import { OAuth2Module } from '@switchit/nestjs-oauth2-server';
 
 @Module({
-    imports: [
-        OAuth2Module.forRoot({
-            userLoader: new UserLoader(),
-            userValidator: new UserValidator(),
-        }),
-    ],
+  imports: [
+    OAuth2Module.forRoot({
+      userLoader: new UserLoader(),
+      userValidator: new UserValidator(),
+    }),
+  ],
 })
 export class AppModule {}
 ```
@@ -106,14 +114,14 @@ import { Module } from '@nestjs/common';
 import { OAuth2Module } from '@switchit/nestjs-oauth2-server';
 
 @Module({
-    imports: [
-        OAuth2Module.forRootAsync({
-            useFactory: () => ({
-                userLoader: new UserLoader(),
-                userValidator: new UserValidator(),
-            })
-        }),
-    ],
+  imports: [
+    OAuth2Module.forRootAsync({
+      useFactory: () => ({
+        userLoader: new UserLoader(),
+        userValidator: new UserValidator(),
+      }),
+    }),
+  ],
 })
 export class AppModule {}
 ```
@@ -125,7 +133,7 @@ and use the different implemented strategies accordingly to the request sent.
 
 ### Client Credentials
 
-Used for server-to-server communications. 
+Used for server-to-server communications.
 
 ```bash
 curl -X POST http://localhost:3000/oauth2/token -d '{"grant_type":"client_credentials", "client_id":"6ab1cfab-0b3d-418b-8ca2-94d98663fb6f", "client_secret": "6nV9GGm1pu8OY0HDZ3Y7QsVnxtkb60wu", "scopes": ["app-1"]}'
@@ -155,11 +163,11 @@ The module comes with a `PassportJS` strategy of type `http-bearer`. You can sec
 ```typescript
 @Controller('oauth2-secured')
 export class TestSecuredController {
-    @Get('me')
-    @UseGuards(AuthGuard('access-token'))
-    async auth(): Promise<any> {
-        return {message: 'hello'};
-    }
+  @Get('me')
+  @UseGuards(AuthGuard('access-token'))
+  async auth(): Promise<any> {
+    return { message: 'hello' };
+  }
 }
 ```
 
@@ -176,10 +184,12 @@ you should use the `useGlobaPipes` with the `ValidationPipe` and the `transform`
 ```typescript
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  useContainer(app.select(AppModule), {fallbackOnErrors: true});
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-  }));
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
 
   await app.listen(3000);
 }

@@ -1,6 +1,9 @@
-import {UserLoaderInterface, UserValidatorInterface} from "../../domain/interface";
+import {
+  UserLoaderInterface,
+  UserValidatorInterface,
+} from '../../domain/interface';
 
 export type OAuth2Options = {
-    userLoader: UserLoaderInterface,
-    userValidator: UserValidatorInterface,
+  userLoader: UserLoaderInterface;
+  userValidator: UserValidatorInterface;
 };

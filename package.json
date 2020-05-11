@@ -1,5 +1,5 @@
 {
-  "name": "@switchit/nestjs-oauth2-server",
+  "name": "@beohoang98/nestjs-oauth2-server",
   "version": "0.1.4",
   "description": "NestJS oauth2 server by SWITCH IT CONSULTING",
   "author": "Switch IT - Consulting",
@@ -34,20 +34,20 @@
     "test:e2e": "jest --config ./test/jest-e2e.json --runInBand --verbose"
   },
   "dependencies": {
-    "@nestjs/common": "^6.0.0",
-    "@nestjs/core": "^6.0.0",
-    "@nestjs/cqrs": "^6.0.0",
-    "@nestjs/passport": "^6.1.0",
-    "@nestjs/swagger": "^3.1.0",
-    "@nestjs/typeorm": "^6.1.3",
+    "@nestjs/common": "^7.0.9",
+    "@nestjs/core": "^7.0.9",
+    "@nestjs/cqrs": "^6.1.0",
+    "@nestjs/passport": "^7.0.0",
+    "@nestjs/swagger": "^4.5.5",
+    "@nestjs/typeorm": "^7.0.0",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.9.1",
+    "class-validator": "^0.12.2",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "rimraf": "^3.0.0",
-    "rxjs": "^6.3.3",
-    "selfsigned": "^1.10.6",
-    "typeorm": "^0.2.18"
+    "rxjs": "^6.5.5",
+    "selfsigned": "^1.10.7",
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
     "@nestjs/platform-express": "^6.5.3",
