@@ -4,9 +4,9 @@ import { Oauth2OptionsFactoryInterface } from './oauth2-options-factory.interfac
 import { OAuth2Options } from './oauth2-options.type';
 
 export interface Oauth2AsyncOptionsInterface
-  extends Pick<ModuleMetadata, 'imports'> {
-  useExisting?: Type<Oauth2OptionsFactoryInterface>;
-  useClass?: Type<Oauth2OptionsFactoryInterface>;
-  useFactory?: (...args: any[]) => Promise<OAuth2Options> | OAuth2Options;
-  inject?: any[];
+    extends Pick<ModuleMetadata, 'imports'> {
+    useExisting?: Type<Oauth2OptionsFactoryInterface>;
+    useClass?: Type<Oauth2OptionsFactoryInterface>;
+    useFactory?: (...args: any[]) => Promise<OAuth2Options> | OAuth2Options;
+    inject?: any[];
 }

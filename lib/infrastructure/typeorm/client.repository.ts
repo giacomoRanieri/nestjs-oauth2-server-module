@@ -1,7 +1,7 @@
 import {
-  ClientRepositoryInterface,
-  ClientEntity,
-  ClientNotFoundException,
+    ClientRepositoryInterface,
+    ClientEntity,
+    ClientNotFoundException,
 } from '../../domain';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
@@ -9,56 +9,56 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class ClientRepository implements ClientRepositoryInterface {
-  constructor(
-    @InjectRepository(ClientEntity)
-    private readonly repository: Repository<ClientEntity>,
-  ) {}
+    constructor(
+        @InjectRepository(ClientEntity)
+        private readonly repository: Repository<ClientEntity>,
+    ) {}
 
-  async find(id: string): Promise<ClientEntity> {
-    const client = await this.repository.findOne(id);
+    async find(id: string): Promise<ClientEntity> {
+        const client = await this.repository.findOne(id);
 
-    if (!client) {
-      throw ClientNotFoundException.withId(id);
+        if (!client) {
+            throw ClientNotFoundException.withId(id);
+        }
+
+        return client;
     }
 
-    return client;
-  }
+    async findByClientId(clientId: string): Promise<ClientEntity> {
+        const client = await this.repository.findOne({
+            where: {
+                clientId,
+            },
+        });
 
-  async findByClientId(clientId: string): Promise<ClientEntity> {
-    const client = await this.repository.findOne({
-      where: {
-        clientId: clientId,
-      },
-    });
+        if (!client) {
+            throw ClientNotFoundException.withClientId(clientId);
+        }
 
-    if (!client) {
-      throw ClientNotFoundException.withClientId(clientId);
+        return client;
     }
 
-    return client;
-  }
+    async findByName(name: string): Promise<ClientEntity> {
+        const client = await this.repository.findOne({
+            where: {
+                name,
+            },
+        });
 
-  async findByName(name: string): Promise<ClientEntity> {
-    const client = await this.repository.findOne({
-      where: {
-        name: name,
-      },
-    });
+        if (!client) {
+            throw ClientNotFoundException.withName(name);
+        }
 
-    if (!client) {
-      throw ClientNotFoundException.withName(name);
+        return client;
     }
 
-    return client;
-  }
+    async create(client: ClientEntity): Promise<ClientEntity> {
+        return await this.repository.save(client);
+    }
 
-  async create(client: ClientEntity): Promise<ClientEntity> {
-    return await this.repository.save(client);
-  }
+    async delete(client: ClientEntity): Promise<ClientEntity> {
+        client.deletedAt = new Date();
 
-  async delete(client: ClientEntity): Promise<ClientEntity> {
-    client.deletedAt = new Date();
-
-    return await this.repository.save(client);
-  }
+        return await this.repository.save(client);
+    }
 }
