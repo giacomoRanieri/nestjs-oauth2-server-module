@@ -62,7 +62,7 @@ describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
       (clientId, clientSecret, scopes) => {
         return request(app.getHttpServer())
           .post('/oauth2/token')
-          .query({
+          .send({
             grant_type: 'client_credentials',
             client_id: clientId,
             client_secret: clientSecret,
@@ -112,7 +112,7 @@ describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
       (clientId, clientSecret, scopes) => {
         return request(app.getHttpServer())
           .post('/oauth2/token')
-          .query({
+          .send({
             grant_type: 'client_credentials',
             client_id: clientId,
             client_secret: clientSecret,
@@ -166,7 +166,7 @@ describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
       (clientId, clientSecret, scopes) => {
         return request(app.getHttpServer())
           .post('/oauth2/token')
-          .query({
+          .send({
             grant_type: 'client_credentials',
             client_id: clientId,
             client_secret: clientSecret,
@@ -185,7 +185,7 @@ describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
       (clientId, clientSecret, scopes) => {
         return request(app.getHttpServer())
           .post('/oauth2/token')
-          .query({
+          .send({
             grant_type: 'client_credentials',
             client_id: clientId,
             client_secret: clientSecret,
@@ -224,7 +224,7 @@ describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
       (refreshToken, clientId, clientSecret) => {
         return request(app.getHttpServer())
           .post('/oauth2/token')
-          .query({
+          .send({
             grant_type: 'refresh_token',
             client_id: clientId,
             client_secret: clientSecret,
@@ -261,7 +261,7 @@ describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
       (refreshToken, clientId, clientSecret) => {
         return request(app.getHttpServer())
           .post('/oauth2/token')
-          .query({
+          .send({
             grant_type: 'refresh_token',
             client_id: clientId,
             client_secret: clientSecret,
@@ -358,7 +358,7 @@ describe('OAuth2 Async Module Use Factory Controller (e2e)', () => {
       (clientId, clientSecret, scopes, username, password) => {
         return request(app.getHttpServer())
           .post('/oauth2/token')
-          .query({
+          .send({
             grant_type: 'password',
             client_id: clientId,
             client_secret: clientSecret,
