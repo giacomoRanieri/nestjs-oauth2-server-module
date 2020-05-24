@@ -20,8 +20,7 @@ import {
 import { OAUTH2_SERVER_OPTIONS } from './oauth2.constants';
 import {
     CreateAccessTokenHandler,
-    CreateClientConsole,
-    CreateClientHandler
+    CreateClientHandler,
 } from './command';
 import {
     AccessTokenRepository,
@@ -37,7 +36,7 @@ import { Oauth2Controller } from '../ui/controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
 
-export const CommandHandlers = [CreateClientHandler, CreateAccessTokenHandler, CreateClientConsole];
+export const CommandHandlers = [CreateClientHandler, CreateAccessTokenHandler];
 
 export const EventHandlers = [];
 
